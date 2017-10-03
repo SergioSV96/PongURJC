@@ -2,4 +2,7 @@
     <string name="app_name">Pong</string>
 
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="dummy_button">Dummy Button</string>
 </resources>

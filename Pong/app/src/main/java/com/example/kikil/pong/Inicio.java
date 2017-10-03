@@ -1,7 +1,6 @@
 package com.example.kikil.pong;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,14 +8,11 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenActivity extends AppCompatActivity {
+public class Inicio extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -86,13 +82,12 @@ public class FullscreenActivity extends AppCompatActivity {
             return false;
         }
     };
-    private static final long SPLASH_SCREEN_DELAY = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fullscreen);
+        setContentView(R.layout.activity_inicio);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -107,28 +102,10 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         });
 
-        //Creamos un TimerTask para pasar al menu en un tiempo determinado
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                // Start the next activity
-               entrar();
-                // Close the activity so the user won't able to go back this
-                // activity pressing Back button
-                finish();
-            }
-        };
-
-        // Simulate a long loading process on application startup.
-        Timer timer = new Timer();
-        timer.schedule(task, SPLASH_SCREEN_DELAY);
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-    }
-   public void entrar(){
-        Intent i = new Intent(this, Inicio.class);
-        startActivity(i);
+        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
