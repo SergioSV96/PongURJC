@@ -7,6 +7,7 @@ import com.mypong.game.game.Pong;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "gnop";
 		new LwjglApplication(new Pong(), config);
 	}
 }

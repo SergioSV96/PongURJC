@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mypong.game.gameobjects.Ball;
 import com.mypong.game.gameobjects.Bar;
 
+import java.util.LinkedList;
+
 public class GameRender {
     private int screenWidth;
     private int screenHeight;
@@ -29,8 +31,7 @@ public class GameRender {
     }
 
     public void render(){
-        Bar barLeft = this.myWorld.getBarLeft();
-        Bar barRight = this.myWorld.getBarRight();
+        LinkedList<Bar> bars = this.myWorld.getBars();
         Ball ball = this.myWorld.getBall();
 
         //Carga color de fondo negro
@@ -39,10 +40,11 @@ public class GameRender {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
-        shapeRenderer.rect(barLeft.getX(), barLeft.getY(), barLeft.getWidth(), barLeft.getHeight());
-        shapeRenderer.rect(barRight.getX(), barRight.getY(), barRight.getWidth(), barRight.getHeight());
-        shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
+
+        for(Bar bar : bars){
+            shapeRenderer.rect(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight());
+        }
+
         shapeRenderer.end();
     }
 

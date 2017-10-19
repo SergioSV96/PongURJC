@@ -3,59 +3,57 @@ package com.mypong.game.gameworld;
 import com.badlogic.gdx.Gdx;
 import com.mypong.game.gameobjects.Ball;
 import com.mypong.game.gameobjects.Bar;
+import java.util.LinkedList;
 
 public class GameWorld {
     private int screenWidth;
     private int screenHeight;
 
-    private Bar barLeft;
-    private Bar barRight;
+    private LinkedList<Bar> bars;
     private Ball ball;
 
     private ScrollHandler handler;
 
     public GameWorld() {
+        this.bars = new LinkedList<Bar>();
         this.handler = new ScrollHandler();
 
         this.screenHeight = Gdx.graphics.getHeight();
         this.screenWidth = Gdx.graphics.getWidth();
 
-        int barHeight = this.screenHeight / 4;
-        int barWidth =  barHeight / 7;
+        int barHeight = this.screenHeight / 5;
+        int barWidth =  barHeight / 5;
 
         int halfHeight = (this.screenHeight / 2) - (barHeight / 2);
         int halfWidth = this.screenWidth / 2;
 
-        int wallSeparationRight = (this.screenWidth - barWidth) - 10;
-        int wallSeparationLeft = 10;
-
         int ballWidth = this.screenWidth / 50;
 
-        barLeft = new Bar(wallSeparationLeft, halfHeight, barWidth, barHeight);
-        barRight = new Bar(wallSeparationRight, halfHeight, barWidth, barHeight);
+
+        bars.add(new Bar(barWidth, barHeight));
+        bars.add(new Bar(barHeight, barWidth));
+        bars.add(new Bar(barHeight, barWidth));
+        bars.add(new Bar(barWidth, barHeight));
+
         ball = new Ball(halfWidth, halfHeight, ballWidth);
     }
 
     public void update(float delta) {
-        this.barLeft.update(delta);
-        this.barRight.update(delta);
+        for(Bar bar : bars){
+            bar.update(delta);
+        }
+
         this.ball.update(delta);
 
-        if (handler.collides(this.barLeft, this.barRight, this.ball)){
-            this.ball.collision();
-        }
-
-        if(handler.ballOutScreen(this.ball)){
-            this.ball.outScreen();
+        for(int x=0; x < bars.size(); x++){
+            for(int y=x+1; y < bars.size(); y++){
+                handler.collidesBar(bars.get(x), bars.get(y));
+            }
         }
     }
 
-    public Bar getBarLeft() {
-        return this.barLeft;
-    }
-
-    public Bar getBarRight() {
-        return this.barRight;
+    public LinkedList<Bar> getBars(){
+        return this.bars;
     }
 
     public Ball getBall() { return this.ball; }

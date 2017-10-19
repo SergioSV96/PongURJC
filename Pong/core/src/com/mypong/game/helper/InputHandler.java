@@ -12,9 +12,6 @@ public class InputHandler implements InputProcessor {
     private int screenHeight;
 
     public InputHandler(GameWorld myWorld) {
-        this.barLeft = myWorld.getBarLeft();
-        this.barRight = myWorld.getBarRight();
-
         this.screenHeight = myWorld.getScreenHeight();
         this.screenWidth = myWorld.getScreenWidth();
     }
@@ -36,20 +33,12 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (screenX > (this.screenWidth / 2)) {
-            this.barRight.onClick(screenY > (this.screenHeight / 2));
-        } else {
-            this.barLeft.onClick(screenY > (this.screenHeight / 2));
-        }
-
-        return true;
+        return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        this.barLeft.onRelease();
-        this.barRight.onRelease();
-        return true;
+        return false;
     }
 
     @Override

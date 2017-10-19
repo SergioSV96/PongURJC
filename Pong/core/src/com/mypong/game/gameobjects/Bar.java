@@ -11,51 +11,54 @@ public class Bar {
     private int width;
     private int height;
     private int screenHeight;
-    private int velocityBar = 500;
+    private int screenWidth;
+    private int velocityBar = 150;
 
-    public Bar(int x, int y, int width, int height) {
+    public Bar(int width, int height) {
         this.screenHeight = Gdx.graphics.getHeight();
+        this.screenWidth = Gdx.graphics.getWidth();
 
-        this.position = new Vector2(x, y);
+        this.position = new Vector2(0, 0);
         this.velocity = new Vector2(0, 0);
         this.width = width;
         this.height = height;
+
+        this.velocity.y = velocityBar;
+        this.velocity.x = velocityBar;
+        randomPosition();
     }
 
     public void update(float delta) {
-        if(this.getY() >= 0){
-            if(this.velocity.y < 0){
-                position.add(velocity.cpy().scl(delta));
-            }
+
+        if(this.position.x <= 0 || this.position.x + this.getWidth() >= this.screenWidth){
+            this.velocity.x = - this.velocity.x;
         }
 
-        if(this.getY() <= this.getScreenHeight() - this.height){
-            if(this.velocity.y > 0){
-                position.add(velocity.cpy().scl(delta));
-            }
+        if(this.position.y <= 0 || this.position.y + this.getHeight() >= this.screenHeight){
+            this.velocity.y = - this.velocity.y;
         }
+
+        position.add(velocity.cpy().scl(delta));
     }
 
-    public void onClick(boolean up) {
-        if(up){
-            velocity.y = velocityBar;
-        } else {
-            velocity.y = -velocityBar;
-        }
+    public void collisionX(){
+        this.velocity.x = - this.velocity.x;
     }
 
-    public void onRelease(){ velocity.y = 0; }
+    public void collisionY(){
+        this.velocity.y = - this.velocity.y;
+    }
 
-    public int getScreenHeight() {
-        return screenHeight;
+    public void randomPosition(){
+        this.position.y = randomNumber((int)this.getHeight(), this.screenHeight);
+        this.position.x = randomNumber((int)this.getWidth(), this.screenWidth);
     }
 
     public float getX() {
         return position.x;
     }
 
-    public float getY() {return position.y;
-    }
+    public float getY() {return position.y; }
 
     public float getWidth() {
         return width;
@@ -66,5 +69,7 @@ public class Bar {
     }
 
     public Rectangle getRectangle(){ return new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight()); }
+
+    public static int randomNumber(int min,int max) {return (int)Math.floor(Math.random()*(max-min+1)); }
 
 }
