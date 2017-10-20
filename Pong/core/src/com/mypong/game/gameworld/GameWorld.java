@@ -14,28 +14,10 @@ public class GameWorld {
 
     private ScrollHandler handler;
 
+    private boolean gameOver;
+
     public GameWorld() {
-        this.bars = new LinkedList<Bar>();
-        this.handler = new ScrollHandler();
-
-        this.screenHeight = Gdx.graphics.getHeight();
-        this.screenWidth = Gdx.graphics.getWidth();
-
-        int barHeight = this.screenHeight / 10;
-        int barWidth =  barHeight / 10;
-
-        int halfHeight = (this.screenHeight / 2) - (barHeight / 2);
-        int halfWidth = this.screenWidth / 2;
-
-        int ballWidth = this.screenWidth / 50;
-
-        int velocity = this.screenWidth / 4;
-
-
-        bars.add(new Bar(barWidth, barHeight, velocity, bars));
-        bars.add(new Bar(barWidth, barHeight, velocity, bars));
-
-        ball = new Ball(halfWidth, halfHeight, ballWidth);
+        newGame();
     }
 
     public void update(float delta) {
@@ -46,8 +28,19 @@ public class GameWorld {
         }
 
         for(int x=0; x < bars.size(); x++){
+            handler.collidesBall(bars.get(x), ball, delta);
+
             for(int y=x+1; y < bars.size(); y++){
                 handler.collidesBar(bars.get(x), bars.get(y), delta);
+            }
+        }
+
+        if(ball.getCollisionsBall() == 3){
+            this.gameOver = true;
+            ball.onRelease();
+
+            for (Bar bar : bars){
+                bar.onRelease();
             }
         }
     }
@@ -57,6 +50,35 @@ public class GameWorld {
     }
 
     public Ball getBall() { return this.ball; }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void newGame(){
+        this.bars = new LinkedList<Bar>();
+        this.handler = new ScrollHandler();
+
+        this.screenHeight = Gdx.graphics.getHeight();
+        this.screenWidth = Gdx.graphics.getWidth();
+
+        int barHeight = this.screenHeight / 10;
+        int barWidth =  barHeight / 10;
+
+        int halfHeight = this.screenHeight / 2;
+        int halfWidth = this.screenWidth / 2;
+
+        int ballWidth = this.screenWidth / 100;
+
+        int velocity = this.screenWidth / 4;
+
+        this.gameOver = false;
+
+        bars.add(new Bar(barWidth, barHeight, velocity, bars));
+        bars.add(new Bar(barWidth, barHeight, velocity, bars));
+
+        ball = new Ball(halfWidth, halfHeight, ballWidth);
+    }
 
     public int getScreenWidth() {
         return screenWidth;

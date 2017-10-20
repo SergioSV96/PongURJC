@@ -1,6 +1,7 @@
 package com.mypong.game.gameworld;
 
 import com.badlogic.gdx.math.Intersector;
+import com.mypong.game.gameobjects.Ball;
 import com.mypong.game.gameobjects.Bar;
 
 public class ScrollHandler {
@@ -12,6 +13,18 @@ public class ScrollHandler {
             } else {
                 bar1.collisionX();
                 bar2.collisionX();
+            }
+        }
+    }
+
+    public void collidesBall(Bar bar, Ball ball, float delta){
+        if(Intersector.overlaps(ball.getCircle(), bar.getRectangle())){
+            if(Intersector.overlaps(ball.getCircle(), bar.newPositionCollisionX(delta))) {
+                bar.collisionY();
+                ball.collision();
+            } else {
+                bar.collisionX();
+                ball.collision();
             }
         }
     }

@@ -15,8 +15,8 @@ public class Bar {
     private int height;
     private int screenHeight;
     private int screenWidth;
+
     private LinkedList<Bar> bars;
-    private int velocityBar;
 
     public Bar(int width, int height, int velocityBar, LinkedList<Bar> bars) {
         this.screenHeight = Gdx.graphics.getHeight();
@@ -26,7 +26,6 @@ public class Bar {
 
         this.position = new Vector2(0, 0);
         this.velocity = new Vector2(0, 0);
-        this.velocityBar = velocityBar;
 
         if(randomNumber(0, 1) == 0){
             this.width = width;
@@ -52,6 +51,11 @@ public class Bar {
         }
 
         position.add(velocity.cpy().scl(delta));
+    }
+
+    public void onRelease(){
+        this.velocity.y = 0;
+        this.velocity.x = 0;
     }
 
     public void collisionX(){
