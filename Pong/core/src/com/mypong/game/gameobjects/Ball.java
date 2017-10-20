@@ -45,6 +45,7 @@ public class Ball {
 
     public void collision(){
         this.collisionsBall++;
+        this.randomColor();
     }
 
     public void onClick(boolean up) {
@@ -79,7 +80,23 @@ public class Ball {
 
     public Circle getCircle(){ return new Circle(this.getX(), this.getY(), this.getRadio()); }
 
+    public void randomColor(){
+        boolean repeatColor = false;
+        Color colors[] = {Color.BLUE, Color.CORAL, Color.GOLD, Color.GREEN, Color.PINK, Color.RED, Color.YELLOW};
+
+        while(!repeatColor){
+            Color newColor = colors[randomNumber(0, colors.length - 1)];
+
+            if(newColor != this.colorBall){
+                repeatColor = true;
+                this.setColorBall(newColor);
+            }
+        }
+    }
+
     public void setColorBall(Color colorBall) {
         this.colorBall = colorBall;
     }
+
+    public static int randomNumber(int min,int max) {return (int)Math.floor(Math.random()*(max-min+1)); }
 }
