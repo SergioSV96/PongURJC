@@ -8,6 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "gnop";
+		config.width = 408;
+		config.height = 272;
 		new LwjglApplication(new Pong(), config);
 	}
 }

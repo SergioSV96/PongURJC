@@ -1,8 +1,11 @@
 package com.mypong.game.gameobjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.LinkedList;
 
 public class Bar {
     private Vector2 position;
@@ -12,16 +15,26 @@ public class Bar {
     private int height;
     private int screenHeight;
     private int screenWidth;
-    private int velocityBar = 150;
+    private LinkedList<Bar> bars;
+    private int velocityBar;
 
-    public Bar(int width, int height) {
+    public Bar(int width, int height, int velocityBar, LinkedList<Bar> bars) {
         this.screenHeight = Gdx.graphics.getHeight();
         this.screenWidth = Gdx.graphics.getWidth();
 
+        this.bars = bars;
+
         this.position = new Vector2(0, 0);
         this.velocity = new Vector2(0, 0);
-        this.width = width;
-        this.height = height;
+        this.velocityBar = velocityBar;
+
+        if(randomNumber(0, 1) == 0){
+            this.width = width;
+            this.height = height;
+        } else {
+            this.width = height;
+            this.height = width;
+        }
 
         this.velocity.y = velocityBar;
         this.velocity.x = velocityBar;
@@ -49,9 +62,34 @@ public class Bar {
         this.velocity.y = - this.velocity.y;
     }
 
+    public Rectangle newPositionCollisionX(float delta){
+        Vector2 newPosition = new Vector2(position.x, position.y);
+        Vector2 newVelocity = new Vector2(-velocity.x, velocity.y);
+
+        newPosition.add(newVelocity.cpy().scl(delta));
+        return new Rectangle(newPosition.x, newPosition.y, this.getWidth(), this.getHeight());
+    }
+
     public void randomPosition(){
-        this.position.y = randomNumber((int)this.getHeight(), this.screenHeight);
-        this.position.x = randomNumber((int)this.getWidth(), this.screenWidth);
+        boolean collision = false;
+
+        while(!collision) {
+            int y = randomNumber((int) this.getHeight(), this.screenHeight);
+            int x = randomNumber((int) this.getWidth(), this.screenWidth);
+
+            for (int j = 0; j < bars.size() && !collision; j++) {
+                if (Intersector.overlaps(bars.get(j).getRectangle(), new Rectangle(x, y, this.getWidth(), this.getHeight()))) {
+                    collision = true;
+                }
+            }
+
+            if (!collision) {
+                this.position.x = x;
+                this.position.y = y;
+
+                collision = true;
+            }
+        }
     }
 
     public float getX() {

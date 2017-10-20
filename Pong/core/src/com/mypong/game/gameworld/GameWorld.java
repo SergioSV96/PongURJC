@@ -21,33 +21,33 @@ public class GameWorld {
         this.screenHeight = Gdx.graphics.getHeight();
         this.screenWidth = Gdx.graphics.getWidth();
 
-        int barHeight = this.screenHeight / 5;
-        int barWidth =  barHeight / 5;
+        int barHeight = this.screenHeight / 10;
+        int barWidth =  barHeight / 10;
 
         int halfHeight = (this.screenHeight / 2) - (barHeight / 2);
         int halfWidth = this.screenWidth / 2;
 
         int ballWidth = this.screenWidth / 50;
 
+        int velocity = this.screenWidth / 4;
 
-        bars.add(new Bar(barWidth, barHeight));
-        bars.add(new Bar(barHeight, barWidth));
-        bars.add(new Bar(barHeight, barWidth));
-        bars.add(new Bar(barWidth, barHeight));
+
+        bars.add(new Bar(barWidth, barHeight, velocity, bars));
+        bars.add(new Bar(barWidth, barHeight, velocity, bars));
 
         ball = new Ball(halfWidth, halfHeight, ballWidth);
     }
 
     public void update(float delta) {
+        this.ball.update(delta);
+
         for(Bar bar : bars){
             bar.update(delta);
         }
 
-        this.ball.update(delta);
-
         for(int x=0; x < bars.size(); x++){
             for(int y=x+1; y < bars.size(); y++){
-                handler.collidesBar(bars.get(x), bars.get(y));
+                handler.collidesBar(bars.get(x), bars.get(y), delta);
             }
         }
     }
