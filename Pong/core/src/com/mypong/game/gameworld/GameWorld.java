@@ -87,7 +87,7 @@ public class GameWorld {
         this.bars.add(new Bar(barWidth, barHeight, velocity, bars));
         this.bars.add(new Bar(barWidth, barHeight, velocity, bars));
 
-        this.ball = new Ball(halfWidth, halfHeight, ballWidth);
+        this.ball = new Ball(halfWidth, halfHeight, ballWidth, velocity);
 
         final Runnable tarea = new Runnable() {
             public void run() {

@@ -61,21 +61,34 @@ public class GameRender {
 
         shapeRenderer.end();
 
+        batcher.begin();
+
+        int numLifes = ball.getCollisionsBall();
+        if(ball.getCollisionsBall() > 3){
+            numLifes = 3;
+        }
+
+        String lifesGame = "Número de vidas: " + (3 - numLifes);
+        AssetLoader.font.setColor(Color.WHITE);
+        AssetLoader.font.draw(batcher, lifesGame, (this.screenWidth - (lifesGame.length() * 11 *  Gdx.graphics.getDensity())), 25 * Gdx.graphics.getDensity());
+
+        batcher.end();
+
         if(this.myWorld.isGameOver()) {
             batcher.begin();
             String playAgain = "¿Volver a jugar?";
             String gameOver = "Has perdido";
 
             AssetLoader.font.setColor(Color.CYAN);
-            AssetLoader.font.draw(batcher, gameOver, (this.screenWidth / 2) - gameOver.length() * 3, (this.screenHeight / 2) + 15);
-            AssetLoader.font.draw(batcher, playAgain, (this.screenWidth / 2) - playAgain.length() * 3, this.screenHeight / 2);
+            AssetLoader.font.draw(batcher, gameOver, (this.screenWidth / 2) - gameOver.length() * 4 * Gdx.graphics.getDensity(), (this.screenHeight / 2) + 25 * Gdx.graphics.getDensity());
+            AssetLoader.font.draw(batcher, playAgain, (this.screenWidth / 2) - playAgain.length() * 4 * Gdx.graphics.getDensity(), this.screenHeight / 2);
             batcher.end();
 
             Stage stage = new Stage();
             Gdx.input.setInputProcessor(stage);
 
-            TextButton buttonYes = AssetLoader.obtainButton("Si", (this.screenWidth / 2) - 50, (this.screenHeight / 2) - 50);
-            TextButton buttonNo = AssetLoader.obtainButton("No", (this.screenWidth / 2) + 10, (this.screenHeight / 2) - 50);
+            TextButton buttonYes = AssetLoader.obtainButton("Si", (this.screenWidth / 2) - 50 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
+            TextButton buttonNo = AssetLoader.obtainButton("No", (this.screenWidth / 2) + 25 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
 
             buttonYes.addListener(new ClickListener(){
                 @Override

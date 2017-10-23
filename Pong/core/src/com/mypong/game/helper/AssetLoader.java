@@ -2,10 +2,12 @@ package com.mypong.game.helper;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
@@ -20,7 +22,7 @@ public class AssetLoader {
         screenWidth = Gdx.graphics.getWidth();
 
         font = new BitmapFont();
-        font.getData().setScale(1, 1);
+        font.getData().setScale(1.5f * Gdx.graphics.getDensity(), 1.5f * Gdx.graphics.getDensity());
     }
 
     public static TextButton obtainButton(String text, float x, float y){
@@ -37,7 +39,7 @@ public class AssetLoader {
         skin.add("default", font);
 
         //Create a texture
-        Pixmap pixmap = new Pixmap(screenWidth/10,screenHeight/10, Pixmap.Format.RGB888);
+        Pixmap pixmap = new Pixmap(screenWidth/10, screenHeight/10, Pixmap.Format.RGB888);
         pixmap.setColor(Color.CYAN);
         pixmap.fill();
         skin.add("background", new Texture(pixmap));
@@ -49,6 +51,7 @@ public class AssetLoader {
         textButtonStyle.checked = skin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.over = skin.newDrawable("background", Color.LIGHT_GRAY);
         textButtonStyle.font = skin.getFont("default");
+        textButtonStyle.font.getData().setScale(1.5f * Gdx.graphics.getDensity(), 1.5f * Gdx.graphics.getDensity());
         skin.add("default", textButtonStyle);
 
         return skin;

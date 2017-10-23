@@ -18,7 +18,7 @@ public class Ball {
 
     private int collisionsBall;
 
-    public Ball(int x, int y, int radio) {
+    public Ball(int x, int y, int radio, int velocityBall) {
         this.screenHeight = Gdx.graphics.getHeight();
 
         this.position = new Vector2(x, y);
@@ -27,6 +27,7 @@ public class Ball {
         this.colorBall = Color.WHITE;
 
         this.collisionsBall = 0;
+        this.velocityBall = velocityBall;
     }
 
     public void update(float delta) {
