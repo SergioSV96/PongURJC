@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -90,11 +91,12 @@ public class GameRender {
             TextButton buttonYes = AssetLoader.obtainButton("Si", (this.screenWidth / 2) - 50 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
             TextButton buttonNo = AssetLoader.obtainButton("No", (this.screenWidth / 2) + 25 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
 
-            buttonYes.addListener(new ClickListener(){
+            buttonYes.addListener(new InputListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     myWorld.newGame();
                     Gdx.input.setInputProcessor(new InputHandler(myWorld));
+                    return true;
                 }});
 
             stage.addActor(buttonYes);

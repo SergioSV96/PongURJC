@@ -66,6 +66,7 @@ public class GameWorld {
     }
 
     public void newGame(){
+        this.timer = null;
         this.bars = new LinkedList<Bar>();
         this.handler = new ScrollHandler();
 
