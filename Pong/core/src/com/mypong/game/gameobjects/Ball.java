@@ -45,7 +45,10 @@ public class Ball {
     }
 
     public void collision(){
-        this.collisionsBall++;
+        if(this.collisionsBall < 3){
+            this.collisionsBall++;
+        }
+
         this.randomColor();
     }
 

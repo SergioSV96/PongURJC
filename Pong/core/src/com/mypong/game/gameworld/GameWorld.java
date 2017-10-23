@@ -66,7 +66,6 @@ public class GameWorld {
     }
 
     public void newGame(){
-        this.timer = null;
         this.bars = new LinkedList<Bar>();
         this.handler = new ScrollHandler();
 
@@ -98,6 +97,11 @@ public class GameWorld {
 
         this.timer = Executors.newSingleThreadScheduledExecutor();
         this.timer.scheduleAtFixedRate(tarea, 10, 10, TimeUnit.SECONDS);
+    }
+
+    public void dispose(){
+        bars.clear();
+        timer = null;
     }
 
     public int getScreenWidth() {

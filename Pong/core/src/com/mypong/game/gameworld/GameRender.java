@@ -64,12 +64,7 @@ public class GameRender {
 
         batcher.begin();
 
-        int numLifes = ball.getCollisionsBall();
-        if(ball.getCollisionsBall() > 3){
-            numLifes = 3;
-        }
-
-        String lifesGame = "Número de vidas: " + (3 - numLifes);
+        String lifesGame = "Número de vidas: " + (3 - ball.getCollisionsBall());
         AssetLoader.font.setColor(Color.WHITE);
         AssetLoader.font.draw(batcher, lifesGame, (this.screenWidth - (lifesGame.length() * 11 *  Gdx.graphics.getDensity())), 25 * Gdx.graphics.getDensity());
 
@@ -94,6 +89,7 @@ public class GameRender {
             buttonYes.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    myWorld.dispose();
                     myWorld.newGame();
                     Gdx.input.setInputProcessor(new InputHandler(myWorld));
                     return true;
