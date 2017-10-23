@@ -84,7 +84,7 @@ public class GameRender {
             Gdx.input.setInputProcessor(stage);
 
             TextButton buttonYes = AssetLoader.obtainButton("Si", (this.screenWidth / 2) - 50 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
-            TextButton buttonNo = AssetLoader.obtainButton("No", (this.screenWidth / 2) + 25 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
+            TextButton buttonNo = AssetLoader.obtainButton("Salir", (this.screenWidth / 2) + 25 * Gdx.graphics.getDensity(), (this.screenHeight / 2) - 70 * Gdx.graphics.getDensity());
 
             buttonYes.addListener(new InputListener() {
                 @Override
@@ -92,6 +92,12 @@ public class GameRender {
                     myWorld.dispose();
                     myWorld.newGame();
                     Gdx.input.setInputProcessor(new InputHandler(myWorld));
+                    return true;
+                }});
+            buttonNo.addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    Gdx.app.exit();
                     return true;
                 }});
 

@@ -1,0 +1,7 @@
+#Mon Oct 02 10:00:28 CEST 2017
+base.0=C\:\\Users\\kikil\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_13bf85bdbd70f4bb54ee7895cf4ada76609a7ce5
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\kikil\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_75987c4ba02773d54445bb6e412665054b80e2f2\\classes.dex
+base.1=C\:\\Users\\kikil\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_75987c4ba02773d54445bb6e412665054b80e2f2
+file.0=C\:\\Users\\kikil\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_13bf85bdbd70f4bb54ee7895cf4ada76609a7ce5\\classes.dex
