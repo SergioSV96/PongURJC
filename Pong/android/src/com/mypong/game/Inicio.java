@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.mypong.game.R;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,6 +27,9 @@ public class Inicio extends Activity {
         logo = (ImageView) findViewById(R.id.logo);
         anim1 = AnimationUtils.loadAnimation(this, R.anim.anim);
         logo.startAnimation(anim1);
+        brujula = (ImageView) findViewById(R.id.brujula);
+        anim2 = AnimationUtils.loadAnimation(this, R.anim.bolita);
+        brujula.startAnimation(anim2);
 
         //Creamos un TimerTask para pasar al menu en un tiempo determinado
         TimerTask task = new TimerTask() {
