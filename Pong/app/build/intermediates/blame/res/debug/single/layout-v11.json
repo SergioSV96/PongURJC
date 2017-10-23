@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_narrow.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_media_cancel_action.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_custom.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_narrow_custom.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_media_action.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_media_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\juanma\\Documents\\GitHub\\PongURJC\\Pong\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media.xml",
+        "source": "C:\\Users\\juanma\\.android\\build-cache\\fd40be68a6dce6095eb72f51d5eebf02edfa34e8\\output\\res\\layout-v11\\notification_template_big_media.xml"
+    }
+]
