@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#000"
+    android:background="#FFFFFF"
     >
     <ImageView
         android:layout_width="wrap_content"
@@ -19,8 +19,8 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/brujula"
-        android:src="@drawable/brujula"
+        android:id="@+id/arcade"
+        android:src="@drawable/arcade"
         android:layout_marginBottom="2px"
         android:scaleY="1"
 

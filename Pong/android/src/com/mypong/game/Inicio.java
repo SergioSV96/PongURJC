@@ -18,7 +18,7 @@ public class Inicio extends Activity {
     Animation anim2;
 
     ImageView logo;
-    ImageView brujula;
+    ImageView arcade;
     private static final long SPLASH_SCREEN_DELAY = 3000; //Tiempo de espera para pasar al menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,9 @@ public class Inicio extends Activity {
         logo = (ImageView) findViewById(R.id.logo);
         anim1 = AnimationUtils.loadAnimation(this, R.anim.anim);
         logo.startAnimation(anim1);
-        brujula = (ImageView) findViewById(R.id.brujula);
+        arcade = (ImageView) findViewById(R.id.arcade);
         anim2 = AnimationUtils.loadAnimation(this, R.anim.bolita);
-        brujula.startAnimation(anim2);
+        arcade.startAnimation(anim2);
 
         //Creamos un TimerTask para pasar al menu en un tiempo determinado
         TimerTask task = new TimerTask() {
@@ -50,6 +50,7 @@ public class Inicio extends Activity {
 
     public void entrar(){
         Intent i = new Intent(this, AndroidLauncher.class);
+        startActivity(i);
     }//entrar
 
 
