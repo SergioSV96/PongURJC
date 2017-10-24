@@ -69,6 +69,13 @@ public class GameRender {
         AssetLoader.font.draw(batcher, lifesGame, (this.screenWidth - (lifesGame.length() * 11 *  Gdx.graphics.getDensity())), 25 * Gdx.graphics.getDensity());
 
         batcher.end();
+        batcher.begin();
+
+        String barsNumber = "Número de barras: " + bars.size();
+        AssetLoader.font.setColor(Color.WHITE);
+        AssetLoader.font.draw(batcher, barsNumber, (barsNumber.length() *  Gdx.graphics.getDensity()), 25 * Gdx.graphics.getDensity());
+
+        batcher.end();
 
         if(this.myWorld.isGameOver()) {
             batcher.begin();
