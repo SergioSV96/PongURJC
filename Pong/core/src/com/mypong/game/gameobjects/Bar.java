@@ -81,6 +81,10 @@ public class Bar {
             int y = randomNumber((int) this.getHeight(), this.screenHeight);
             int x = randomNumber((int) this.getWidth(), this.screenWidth);
 
+            if(Intersector.overlaps(new Rectangle(x, y, this.getWidth(), this.getHeight()), new Rectangle(((this.screenWidth/2)-20), this.screenHeight, 41, this.screenHeight))){
+                collision = true;
+            }
+
             for (int j = 0; j < bars.size() && !collision; j++) {
                 if (Intersector.overlaps(bars.get(j).getRectangle(), new Rectangle(x, y, this.getWidth(), this.getHeight()))) {
                     collision = true;
