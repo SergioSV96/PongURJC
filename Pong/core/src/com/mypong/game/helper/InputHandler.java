@@ -38,9 +38,9 @@ public class InputHandler implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(!this.myWorld.isGameOver()) {
             if (screenX > (this.screenWidth / 2)) {
-                this.ball.onClick(screenY > (this.screenHeight / 2));
+                this.ball.onClick(screenY > (ball.getY()));
             } else {
-                this.ball.onClick(screenY > (this.screenHeight / 2));
+                this.ball.onClick(screenY > (ball.getY()));
             }
 
             return true;
