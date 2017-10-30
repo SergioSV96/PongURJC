@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:gravity="center"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="#FFFFFF"
     >
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/logo"
         android:src="@drawable/pong"
-        android:layout_marginTop="2px"
+        android:layout_margin="2px"
         />
 
     <ImageView
@@ -21,7 +21,7 @@
         android:layout_height="150dp"
         android:id="@+id/arcade"
         android:src="@drawable/arcade"
-        android:layout_marginBottom="2px"
+        android:layout_margin="2px"
         android:scaleY="1"
 
         />

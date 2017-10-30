@@ -49,7 +49,7 @@ public class Inicio extends Activity {
     }
 
     public void entrar(){
-        Intent i = new Intent(this, AndroidLauncher.class);
+        Intent i = new Intent(this, Menu.class);
         startActivity(i);
     }//entrar
 

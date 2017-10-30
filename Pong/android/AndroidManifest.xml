@@ -19,18 +19,22 @@
             android:name=".AndroidLauncher"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Inicio"
-            android:label="pong">
+            android:label="pong"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Menu"
+            android:label="@string/title_activity_menu"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
     </application>
 
 </manifest>
