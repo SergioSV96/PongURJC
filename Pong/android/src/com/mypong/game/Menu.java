@@ -27,7 +27,7 @@ public class Menu extends Activity {
      */
     public void lanzarSalir(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Caza Tesoros");
+        builder.setTitle("PONG");
         builder.setMessage("¿Seguro que quieres salir de la aplicacion?");
         builder.setPositiveButton("SALIR", new DialogInterface.OnClickListener() {
             @Override
