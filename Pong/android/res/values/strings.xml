@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">Pong</string>
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="title_activity_menu">Menu</string>
 
 </resources>
