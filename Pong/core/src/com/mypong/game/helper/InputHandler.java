@@ -1,15 +1,22 @@
 package com.mypong.game.helper;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 import com.mypong.game.gameobjects.Ball;
+import com.mypong.game.gameobjects.Bar;
 import com.mypong.game.gameworld.GameWorld;
 
 public class InputHandler implements InputProcessor {
 
     private Ball ball;
+    private Bar bar;
     private GameWorld myWorld;
     private int screenWidth;
     private int screenHeight;
+
+    private Vector2 position = new Vector2();
+
 
     public InputHandler(GameWorld myWorld) {
         this.screenHeight = myWorld.getScreenHeight();
@@ -17,6 +24,7 @@ public class InputHandler implements InputProcessor {
 
         this.myWorld = myWorld;
         this.ball = myWorld.getBall();
+        this.bar = myWorld.getBar();
     }
 
     @Override
@@ -36,33 +44,34 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(!this.myWorld.isGameOver()) {
-            if (screenX > (this.screenWidth / 2)) {
-                this.ball.onClick(screenY > (ball.getY()));
-            } else {
-                this.ball.onClick(screenY > (ball.getY()));
-            }
-
-            return true;
-        }
-
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(!this.myWorld.isGameOver()) {
-            this.ball.onRelease();
-
-            return true;
-        }
-
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        int x = screenX;
+        int y = screenY;
+
+        if(x > screenWidth){
+            x = (x - screenWidth);
+        } else if(x == 0){
+            x = screenWidth - (bar.getWidth() + 5);
+        }
+
+        if((y + bar.getHeight()) > screenHeight){
+            y = 10;
+        } else if(y == 0){
+            y = screenHeight - (bar.getHeight() + 5);
+        }
+
+        bar.setX(x);
+        bar.setY(y);
+        return true;
     }
 
     @Override

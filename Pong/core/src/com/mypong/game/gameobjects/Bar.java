@@ -16,41 +16,18 @@ public class Bar {
     private int screenHeight;
     private int screenWidth;
 
-    private LinkedList<Bar> bars;
-
-    public Bar(int width, int height, int velocityBar, LinkedList<Bar> bars) {
+    public Bar(int x, int y, int width, int height, int velocityBar) {
         this.screenHeight = Gdx.graphics.getHeight();
         this.screenWidth = Gdx.graphics.getWidth();
 
-        this.bars = bars;
-
-        this.position = new Vector2(0, 0);
+        this.position = new Vector2(x, y);
         this.velocity = new Vector2(0, 0);
 
-        if(randomNumber(0, 1) == 0){
-            this.width = width;
-            this.height = height;
-        } else {
-            this.width = height;
-            this.height = width;
-        }
+        this.width = width;
+        this.height = height;
 
-        this.velocity.y = velocityBar;
-        this.velocity.x = velocityBar;
-        randomPosition();
-    }
-
-    public void update(float delta) {
-
-        if(this.position.x <= 0 || this.position.x + this.getWidth() >= this.screenWidth){
-            this.velocity.x = - this.velocity.x;
-        }
-
-        if(this.position.y <= 0 || this.position.y + this.getHeight() >= this.screenHeight){
-            this.velocity.y = - this.velocity.y;
-        }
-
-        position.add(velocity.cpy().scl(delta));
+        this.velocity.y = 0;
+        this.velocity.x = 0;
     }
 
     public void onRelease(){
@@ -58,46 +35,16 @@ public class Bar {
         this.velocity.x = 0;
     }
 
-    public void collisionX(){
-        this.velocity.x = - this.velocity.x;
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 
-    public void collisionY(){
-        this.velocity.y = - this.velocity.y;
+    public void setX(int x) {
+        this.position.x = x;
     }
 
-    public Rectangle newPositionCollisionX(float delta){
-        Vector2 newPosition = new Vector2(position.x, position.y);
-        Vector2 newVelocity = new Vector2(-velocity.x, velocity.y);
-
-        newPosition.add(newVelocity.cpy().scl(delta));
-        return new Rectangle(newPosition.x, newPosition.y, this.getWidth(), this.getHeight());
-    }
-
-    public void randomPosition(){
-        boolean collision = false;
-
-        while(!collision) {
-            int y = randomNumber((int) this.getHeight(), this.screenHeight);
-            int x = randomNumber((int) this.getWidth(), this.screenWidth);
-
-            if(Intersector.overlaps(new Rectangle(x, y, this.getWidth(), this.getHeight()), new Rectangle(((this.screenWidth/2)-20), this.screenHeight, 41, this.screenHeight))){
-                collision = true;
-            }
-
-            for (int j = 0; j < bars.size() && !collision; j++) {
-                if (Intersector.overlaps(bars.get(j).getRectangle(), new Rectangle(x, y, this.getWidth(), this.getHeight()))) {
-                    collision = true;
-                }
-            }
-
-            if (!collision) {
-                this.position.x = x;
-                this.position.y = y;
-
-                collision = true;
-            }
-        }
+    public void setY(int y) {
+        this.position.y = y;
     }
 
     public float getX() {
@@ -106,11 +53,11 @@ public class Bar {
 
     public float getY() {return position.y; }
 
-    public float getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 

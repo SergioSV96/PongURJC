@@ -43,7 +43,7 @@ public class GameRender {
     }
 
     public void render(){
-        LinkedList<Bar> bars = this.myWorld.getBars();
+        Bar bar = this.myWorld.getBar();
         Ball ball = this.myWorld.getBall();
 
         //Carga color de fondo negro
@@ -52,17 +52,17 @@ public class GameRender {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        shapeRenderer.setColor(ball.getColorBall());
-        shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
+        //shapeRenderer.setColor(ball.getColorBall());
+        //shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
 
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
-        for(Bar bar : bars){
-            shapeRenderer.rect(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight());
-        }
+        shapeRenderer.rect(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight());
 
         shapeRenderer.end();
 
+        /*
         batcher.begin();
+
 
         String lifesGame = "Número de vidas: " + (3 - ball.getCollisionsBall());
         AssetLoader.font.setColor(Color.WHITE);
@@ -76,7 +76,8 @@ public class GameRender {
         AssetLoader.font.draw(batcher, barsNumber, (barsNumber.length() *  Gdx.graphics.getDensity()), 25 * Gdx.graphics.getDensity());
 
         batcher.end();
-
+        */
+        /*
         if(this.myWorld.isGameOver()) {
             batcher.begin();
             String playAgain = "¿Volver a jugar?";
@@ -113,7 +114,7 @@ public class GameRender {
 
             stage.act();
             stage.draw();
-        }
+        }*/
     }
 
 }

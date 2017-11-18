@@ -12,7 +12,7 @@ public class GameWorld {
     private int screenWidth;
     private int screenHeight;
 
-    private LinkedList<Bar> bars;
+    private Bar bar;
     private Ball ball;
 
     private int barHeight;
@@ -31,32 +31,10 @@ public class GameWorld {
 
     public void update(float delta) {
         this.ball.update(delta);
-
-        for(Bar bar : bars){
-            bar.update(delta);
-        }
-
-        for(int x=0; x < bars.size(); x++){
-            handler.collidesBall(bars.get(x), ball, delta);
-
-            for(int y=x+1; y < bars.size(); y++){
-                handler.collidesBar(bars.get(x), bars.get(y), delta);
-            }
-        }
-
-        if(ball.getCollisionsBall() == 3){
-            this.gameOver = true;
-            this.timer.shutdown();
-            ball.onRelease();
-
-            for (Bar bar : bars){
-                bar.onRelease();
-            }
-        }
     }
 
-    public LinkedList<Bar> getBars(){
-        return this.bars;
+    public Bar getBar() {
+        return this.bar;
     }
 
     public Ball getBall() { return this.ball; }
@@ -66,7 +44,6 @@ public class GameWorld {
     }
 
     public void newGame(){
-        this.bars = new LinkedList<Bar>();
         this.handler = new ScrollHandler();
 
         this.screenHeight = Gdx.graphics.getHeight();
@@ -84,24 +61,8 @@ public class GameWorld {
 
         this.gameOver = false;
 
-        this.bars.add(new Bar(barWidth, barHeight, velocity, bars));
-        this.bars.add(new Bar(barWidth, barHeight, velocity, bars));
-
         this.ball = new Ball(halfWidth, halfHeight, ballWidth, velocity);
-
-        final Runnable tarea = new Runnable() {
-            public void run() {
-                bars.add(new Bar(barWidth, barHeight, velocity, bars));
-            }
-        };
-
-        this.timer = Executors.newSingleThreadScheduledExecutor();
-        this.timer.scheduleAtFixedRate(tarea, 10, 10, TimeUnit.SECONDS);
-    }
-
-    public void dispose(){
-        bars.clear();
-        timer = null;
+        this.bar = new Bar(halfWidth, halfHeight, barWidth, barHeight, velocity);
     }
 
     public int getScreenWidth() {
