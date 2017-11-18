@@ -53,8 +53,12 @@ public class GameRender {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        //shapeRenderer.setColor(ball.getColorBall());
-        //shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
+        shapeRenderer.setColor(ball.getColorBall());
+        if(ball.getOutScreen()%2 == 0){
+            shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
+        } else {
+            shapeRenderer.rect(ball.getX(), ball.getY(), ball.getRadio() * 2, ball.getRadio() * 2);
+        }
 
         shapeRenderer.setColor(Color.RED);
         for(Bar shoot : shoots){
@@ -64,12 +68,8 @@ public class GameRender {
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
         shapeRenderer.rect(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight());
 
-
-
         shapeRenderer.end();
-
         batcher.begin();
-
 
         String lifesGame = "Número de Disparos: " + this.myWorld.getNumShoots();
         AssetLoader.font.setColor(Color.WHITE);
@@ -77,13 +77,19 @@ public class GameRender {
 
         batcher.end();
 
-        if(this.myWorld.isGameWin()) {
+        if(this.myWorld.isGameWin() || this.myWorld.isGameOver()) {
             batcher.begin();
             String playAgain = "¿Volver a jugar?";
-            String gameOver = "Has ganado";
+            String message;
+
+            if(this.myWorld.isGameWin()){
+                message = "Has Ganado";
+            } else {
+                message = "Has Perdido";
+            }
 
             AssetLoader.font.setColor(Color.CYAN);
-            AssetLoader.font.draw(batcher, gameOver, (this.screenWidth / 2) - gameOver.length() * 4 * Gdx.graphics.getDensity(), (this.screenHeight / 2) + 25 * Gdx.graphics.getDensity());
+            AssetLoader.font.draw(batcher, message, (this.screenWidth / 2) - message.length() * 4 * Gdx.graphics.getDensity(), (this.screenHeight / 2) + 25 * Gdx.graphics.getDensity());
             AssetLoader.font.draw(batcher, playAgain, (this.screenWidth / 2) - playAgain.length() * 4 * Gdx.graphics.getDensity(), this.screenHeight / 2);
             batcher.end();
 

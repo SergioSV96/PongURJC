@@ -26,6 +26,7 @@ public class GameWorld {
     private ScrollHandler handler;
 
     private boolean gameWin;
+    private boolean gameOver;
 
     public GameWorld() {
         newGame();
@@ -45,6 +46,14 @@ public class GameWorld {
 
         for(Integer x : deleteShoots){
             shoots.remove(x);
+        }
+
+        for(Bar shoot : shoots){
+            if(handler.rightShot(shoot, this.ball)){
+                gameWin = true;
+                ball.onRelease();
+                shoot.onRelease();
+            }
         }
     }
 
@@ -66,12 +75,24 @@ public class GameWorld {
         if(numShoots < 5) {
             this.shoots.add(shoot);
             numShoots++;
-        }
 
+            if(numShoots == 5){
+                this.gameOver = true;
+                this.ball.onRelease();
+
+                for(Bar s : shoots){
+                    s.onRelease();
+                }
+            }
+        }
     }
 
     public boolean isGameWin() {
         return gameWin;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     public void newGame(){
@@ -86,11 +107,12 @@ public class GameWorld {
         int halfHeight = this.screenHeight / 2;
         int halfWidth = this.screenWidth / 2;
 
-        int ballWidth = this.screenWidth / 100;
+        int ballWidth = this.screenWidth / 70;
 
         int velocity = this.screenWidth / 4;
 
         this.gameWin = false;
+        this.gameOver = false;
 
         this.ball = new Ball(halfWidth, halfHeight, ballWidth, velocity);
         this.bar = new Bar(halfWidth, halfHeight, barWidth, barHeight, 0, 0);
