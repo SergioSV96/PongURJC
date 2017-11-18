@@ -3,6 +3,8 @@ package com.mypong.game.gameworld;
 import com.badlogic.gdx.Gdx;
 import com.mypong.game.gameobjects.Ball;
 import com.mypong.game.gameobjects.Bar;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,17 +15,17 @@ public class GameWorld {
     private int screenHeight;
 
     private Bar bar;
+    private LinkedList<Bar> shoots;
     private Ball ball;
 
     private int barHeight;
     private int barWidth;
-    private int velocity;
+
+    private int numShoots;
 
     private ScrollHandler handler;
 
-    private boolean gameOver;
-
-    private ScheduledExecutorService timer;
+    private boolean gameWin;
 
     public GameWorld() {
         newGame();
@@ -31,6 +33,23 @@ public class GameWorld {
 
     public void update(float delta) {
         this.ball.update(delta);
+
+        ArrayList<Integer> deleteShoots = new ArrayList<Integer>();
+        for(int x=0; x < shoots.size(); x++){
+            shoots.get(x).update(delta);
+
+            if(shoots.get(x).getHeight() >= screenHeight || shoots.get(x).getHeight() <= 0 || shoots.get(x).getWidth() >= screenWidth || shoots.get(x).getWidth() <= 0){
+                deleteShoots.add(x);
+            }
+        }
+
+        for(Integer x : deleteShoots){
+            shoots.remove(x);
+        }
+    }
+
+    public LinkedList<Bar> getShoots() {
+        return shoots;
     }
 
     public Bar getBar() {
@@ -39,8 +58,20 @@ public class GameWorld {
 
     public Ball getBall() { return this.ball; }
 
-    public boolean isGameOver() {
-        return gameOver;
+    public int getNumShoots() {
+        return numShoots;
+    }
+
+    public void addShoot(Bar shoot){
+        if(numShoots < 5) {
+            this.shoots.add(shoot);
+            numShoots++;
+        }
+
+    }
+
+    public boolean isGameWin() {
+        return gameWin;
     }
 
     public void newGame(){
@@ -57,12 +88,19 @@ public class GameWorld {
 
         int ballWidth = this.screenWidth / 100;
 
-        this.velocity = this.screenWidth / 4;
+        int velocity = this.screenWidth / 4;
 
-        this.gameOver = false;
+        this.gameWin = false;
 
         this.ball = new Ball(halfWidth, halfHeight, ballWidth, velocity);
-        this.bar = new Bar(halfWidth, halfHeight, barWidth, barHeight, velocity);
+        this.bar = new Bar(halfWidth, halfHeight, barWidth, barHeight, 0, 0);
+
+        this.shoots = new LinkedList<Bar>();
+        this.numShoots = 0;
+    }
+
+    public void dispose(){
+        shoots.clear();
     }
 
     public int getScreenWidth() {

@@ -16,7 +16,7 @@ public class Bar {
     private int screenHeight;
     private int screenWidth;
 
-    public Bar(int x, int y, int width, int height, int velocityBar) {
+    public Bar(int x, int y, int width, int height, int velocityBarX, int velocityBarY) {
         this.screenHeight = Gdx.graphics.getHeight();
         this.screenWidth = Gdx.graphics.getWidth();
 
@@ -26,8 +26,12 @@ public class Bar {
         this.width = width;
         this.height = height;
 
-        this.velocity.y = 0;
-        this.velocity.x = 0;
+        this.velocity.y = velocityBarY;
+        this.velocity.x = velocityBarX;
+    }
+
+    public void update(float delta) {
+        position.add(velocity.cpy().scl(delta));
     }
 
     public void onRelease(){

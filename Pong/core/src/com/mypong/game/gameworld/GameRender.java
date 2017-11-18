@@ -43,6 +43,7 @@ public class GameRender {
     }
 
     public void render(){
+        LinkedList<Bar> shoots = this.myWorld.getShoots();
         Bar bar = this.myWorld.getBar();
         Ball ball = this.myWorld.getBall();
 
@@ -55,33 +56,31 @@ public class GameRender {
         //shapeRenderer.setColor(ball.getColorBall());
         //shapeRenderer.circle(ball.getX(), ball.getY(), ball.getRadio());
 
+        shapeRenderer.setColor(Color.RED);
+        for(Bar shoot : shoots){
+            shapeRenderer.rect(shoot.getX(), shoot.getY(), shoot.getWidth(), shoot.getHeight());
+        }
+
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
         shapeRenderer.rect(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight());
 
+
+
         shapeRenderer.end();
 
-        /*
         batcher.begin();
 
 
-        String lifesGame = "Número de vidas: " + (3 - ball.getCollisionsBall());
+        String lifesGame = "Número de Disparos: " + this.myWorld.getNumShoots();
         AssetLoader.font.setColor(Color.WHITE);
         AssetLoader.font.draw(batcher, lifesGame, (this.screenWidth - (lifesGame.length() * 11 *  Gdx.graphics.getDensity())), 25 * Gdx.graphics.getDensity());
 
         batcher.end();
-        batcher.begin();
 
-        String barsNumber = "Número de barras: " + bars.size();
-        AssetLoader.font.setColor(Color.WHITE);
-        AssetLoader.font.draw(batcher, barsNumber, (barsNumber.length() *  Gdx.graphics.getDensity()), 25 * Gdx.graphics.getDensity());
-
-        batcher.end();
-        */
-        /*
-        if(this.myWorld.isGameOver()) {
+        if(this.myWorld.isGameWin()) {
             batcher.begin();
             String playAgain = "¿Volver a jugar?";
-            String gameOver = "Has perdido";
+            String gameOver = "Has ganado";
 
             AssetLoader.font.setColor(Color.CYAN);
             AssetLoader.font.draw(batcher, gameOver, (this.screenWidth / 2) - gameOver.length() * 4 * Gdx.graphics.getDensity(), (this.screenHeight / 2) + 25 * Gdx.graphics.getDensity());
@@ -114,7 +113,7 @@ public class GameRender {
 
             stage.act();
             stage.draw();
-        }*/
+        }
     }
 
 }
